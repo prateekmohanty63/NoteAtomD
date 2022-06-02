@@ -6,6 +6,9 @@ from .models import Note
 from .serializers import NoteSerializer
 # Create your views here.
 
+# csrf token
+
+
 @api_view(['GET'])
 def getRoutes(request):
     routes = [
@@ -63,6 +66,21 @@ def deleteNote(request,pk):
     note.delete()
 
     return Response('Note was deleted')
+
+
+# create note
+
+@api_view(['POST'])
+def createNote(request):
+    data=request.data
+    note=Note.objects.create(
+        body=data['body']
+    )
+    serializer=NoteSerializer(note,many=False)
+    
+    return Response(serializer.data)
+
+
 
 
 
