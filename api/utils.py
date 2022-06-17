@@ -9,6 +9,12 @@ def getAllNotes(request):
     serializer=NoteSerializer(notes,many=True)
     return Response(serializer.data)
 
+def createNote(request):
+    data=request.data
+    note=Note.objects.create(body=data['body'])
+    serializer=NoteSerializer(note,many=False)
+    return Response(serializer.data)
+
 def deleteNote(request,pk):
     note=Note.objects.get(id=pk)
     note.delete()
