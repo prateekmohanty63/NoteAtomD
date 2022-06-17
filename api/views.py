@@ -9,6 +9,7 @@ from .utils import updateNote,getNoteDetails,deleteNote,getAllNotes,createNote
 
 # csrf token
 
+# All views present in utils
 
 @api_view(['GET'])
 def getRoutes(request):
