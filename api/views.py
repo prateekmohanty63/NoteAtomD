@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Note
 from .serializers import NoteSerializer
+from .utils import updateNote
 # Create your views here.
 
 # csrf token
@@ -70,14 +71,8 @@ def getNote(request,pk):
         return Response(serializer.data)
     
     if request.method=="PUT":
-        data=request.data
-        print(data)
-        note=Note.objects.get(id=pk)
-        serializer=NoteSerializer(instance=note,data=data)
-
-        if serializer.is_valid():
-            serializer.save()
-        return Response(serializer.data)
+        return updateNote(request,pk)
+         
     
     if request.method=="DELETE":
         note=Note.objects.get(id=pk)
